@@ -1,0 +1,25 @@
+{
+	"name": "persamaan-kuadrat",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"nodemon": "^2.0.7"
+	},
+	"devDependencies": {
+		"concurrently": "^5.3.0"
+	},
+	"scripts": {
+		"start": "node server",
+		"server": "nodemon server.js --config nodemon.json",
+		"client": "npm start --prefix client",
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
