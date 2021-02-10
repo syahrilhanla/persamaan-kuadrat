@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import "./DynamicForm.css";
 import "./Button.css";
 import { GlobalContext } from "./GlobalContext";
+import { EquationsData } from "./EquationData";
 
 export const DynamicForm = ({ isRandom }) => {
 	const [valueA, setA] = useState("");
@@ -44,25 +45,27 @@ export const DynamicForm = ({ isRandom }) => {
 		let b = valueB;
 		let c = valueC;
 
+		console.log(a, b, c);
+
 		const displayA = () => {
 			if (a === "0") {
 				return "";
 			} else if (a === "") {
 				return (
 					<span>
-						ax<sup>2</sup> +
+						<EquationsData text='ax^2 + ' />
 					</span>
 				);
 			} else if (a === "1") {
 				return (
 					<span>
-						x<sup>2</sup> +
+						<EquationsData text='x^2 + ' />
 					</span>
 				);
 			} else {
 				return (
 					<span>
-						{a}x<sup>2</sup> +
+						<EquationsData text={`${a}x^2 + `} />
 					</span>
 				);
 			}
@@ -70,23 +73,55 @@ export const DynamicForm = ({ isRandom }) => {
 
 		const displayB = () => {
 			if (b === "0") {
-				return "";
-			} else if (b === "") return " bx";
+				return ''
+			} else if (b === "") return (
+				<span>
+					<EquationsData text={` bx + `} />
+				</span>
+			)
 			else if (b === "1") {
-				return " x ";
-			} else if (b.includes("-")) return ` (-${b})x`;
+				return (
+					<span>
+						<EquationsData text={` x + `} />
+					</span>
+				)
+			} else if (b.includes("-") || (b < 0)) return (
+				<span>
+					<EquationsData text={` (${b})x + `} />
+				</span>
+			)
 			else {
-				return ` ${b}x`;
+				return (
+					<span>
+						<EquationsData text={` ${b}x + `} />
+					</span>
+				)
 			}
 		};
 
 		const displayC = () => {
 			if (c === "0") {
 				return "";
-			} else if (c === "") return " + c";
-			else if (c === "1") return " + 1";
-			else if (c.includes("-")) return ` + (-${c})`;
-			else return ` + ${c}`;
+			} else if (c === "") return (
+				<span>
+					<EquationsData text={`c`} />
+				</span>
+			)
+			else if (c === "1") return (
+				<span>
+					<EquationsData text={`1`} />
+				</span>
+			)
+			else if (c.includes("-") || (c < 0)) return (
+				<span>
+					<EquationsData text={`(${c})`} />
+				</span>
+			)
+			else return (
+				<span>
+					<EquationsData text={`${c}`} />
+				</span>
+			)
 		};
 
 		return (
@@ -96,6 +131,7 @@ export const DynamicForm = ({ isRandom }) => {
 					{displayB()}
 					{displayC()} = 0
 				</h3>
+
 			</>
 		);
 	};

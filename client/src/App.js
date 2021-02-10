@@ -12,10 +12,6 @@ function App() {
 		console.log("choice", choice);
 	};
 
-	useEffect(() => {
-		console.log("2", 2);
-	}, []);
-
 	const Buttons = () => {
 		return (
 			<>
