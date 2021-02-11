@@ -1,0 +1,32 @@
+Date : 2021-02-11 13:12:59
+Directory : d:\D\TUGAS ON GOING\SKRIPSI\persamaan-kuadrat-master\client\src\components
+Total : 7 files,  452 codes, 5 comments, 52 blanks, all 509 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |          5 |        432 |          5 |         50 |        487 |
+| CSS        |          2 |         20 |          0 |          2 |         22 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                        | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                           |          7 |        452 |          5 |         52 |        509 |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                    | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\D\TUGAS ON GOING\SKRIPSI\persamaan-kuadrat-master\client\src\components\Button.css       | CSS        |         10 |          0 |          1 |         11 |
+| d:\D\TUGAS ON GOING\SKRIPSI\persamaan-kuadrat-master\client\src\components\Button.js        | JavaScript |         27 |          0 |          5 |         32 |
+| d:\D\TUGAS ON GOING\SKRIPSI\persamaan-kuadrat-master\client\src\components\DynamicForm.css  | CSS        |         10 |          0 |          1 |         11 |
+| d:\D\TUGAS ON GOING\SKRIPSI\persamaan-kuadrat-master\client\src\components\DynamicForm.js   | JavaScript |        235 |          2 |         26 |        263 |
+| d:\D\TUGAS ON GOING\SKRIPSI\persamaan-kuadrat-master\client\src\components\EquationData.js  | JavaScript |          8 |          0 |          2 |         10 |
+| d:\D\TUGAS ON GOING\SKRIPSI\persamaan-kuadrat-master\client\src\components\GlobalContext.js | JavaScript |         59 |          3 |          9 |         71 |
+| d:\D\TUGAS ON GOING\SKRIPSI\persamaan-kuadrat-master\client\src\components\QuestionList.js  | JavaScript |        103 |          0 |          8 |        111 |
+| Total                                                                                       |            |        452 |          5 |         52 |        509 |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

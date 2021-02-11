@@ -10,7 +10,6 @@ export const DynamicForm = ({ isRandom }) => {
 	const [valueC, setC] = useState("");
 	const [valueD, setD] = useState("");
 	const [valueX, setX] = useState({});
-	const [random, setRandom] = useState(false);
 
 	const { pickedQuestion } = useContext(GlobalContext);
 
