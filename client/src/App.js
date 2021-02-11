@@ -3,6 +3,7 @@ import "./App.css";
 import { DynamicForm } from "./components/DynamicForm";
 import { Button } from "./components/Button";
 import { GlobalProvider } from "./components/GlobalContext";
+import { QuestionList } from "./components/QuestionList";
 
 function App() {
 	const [userChoice, setUserChoice] = useState(0);
@@ -39,7 +40,10 @@ function App() {
 					{userChoice === 1 ? (
 						<DynamicForm isRandom={false} />
 					) : userChoice === 2 ? (
-						<DynamicForm isRandom={true} />
+						<>
+							<DynamicForm isRandom={true} />
+							<QuestionList />
+						</>
 					) : null}
 				</div>
 			</div>

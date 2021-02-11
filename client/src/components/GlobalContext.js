@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 import axios from "axios";
 
 const AppReducer = (state, action) => {
@@ -8,6 +8,12 @@ const AppReducer = (state, action) => {
 				...state,
 				pickedQuestion: [action.payload],
 			};
+		case "FILL_QUESTIONS":
+			// console.log(action.payload)
+			return {
+				...state,
+				questionsData: action.payload,
+			};
 		default:
 			return state;
 	}
@@ -15,6 +21,7 @@ const AppReducer = (state, action) => {
 
 const initialState = {
 	pickedQuestion: [],
+	questionsData: []
 };
 
 export const GlobalContext = createContext(initialState);
@@ -22,20 +29,21 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
 	// eslint-disable-next-line
 	const [state, dispatch] = useReducer(AppReducer, initialState);
-
+	let questionsList;
 	const getQuestions = async () => {
 		try {
 			const res = await axios.get("/questions");
+			questionsList = res.data.data
+			// console.log(questionsList);
 
-			// Assigning results to global variable
-			questionsList = res.data.data;
-			console.log(questionsList);
+			dispatch({
+				type: "FILL_QUESTIONS",
+				payload: res.data.data,
+			});
 		} catch (error) {
 			console.log(error);
 		}
 	};
-
-	let questionsList;
 
 	const chooseNumber = () => {
 		const ids = questionsList.map((item) => item);
@@ -53,7 +61,7 @@ export const GlobalProvider = ({ children }) => {
 				pickedQuestion: state.pickedQuestion,
 				chooseNumber,
 				getQuestions,
-				questionsList: questionsList,
+				questionsData: state.questionsData
 			}}
 		>
 			{children}

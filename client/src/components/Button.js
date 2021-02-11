@@ -4,7 +4,7 @@ import { GlobalContext } from "./GlobalContext";
 import "./Button.css";
 
 export const Button = ({ text, choice }) => {
-	const { getQuestions, chooseNumber, pickedQuestion, fakeData } = useContext(
+	const { getQuestions, chooseNumber, pickedQuestion, fakeData, questionsData } = useContext(
 		GlobalContext
 	);
 

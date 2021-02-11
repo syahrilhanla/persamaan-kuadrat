@@ -14,7 +14,7 @@ export const DynamicForm = ({ isRandom }) => {
 
 	const { pickedQuestion } = useContext(GlobalContext);
 
-	console.log(pickedQuestion);
+	// console.log(pickedQuestion);
 
 	useEffect(() => {
 		setA(pickedQuestion.map((item) => item.a));
@@ -45,7 +45,7 @@ export const DynamicForm = ({ isRandom }) => {
 		let b = valueB;
 		let c = valueC;
 
-		console.log(a, b, c);
+		// console.log(a, b, c);
 
 		const displayA = () => {
 			if (a === "0") {
