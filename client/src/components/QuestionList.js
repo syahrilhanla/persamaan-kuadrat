@@ -100,12 +100,11 @@ export const QuestionList = () => {
       <h2>Soal:</h2>
       {questionsData.map(question => {
         return (
-          <>
-            {/* <h3><span>{question.id}. {question.a} {question.b} {question.c}</span></h3> */}
-            <ShowEquation a={question.a} b={question.b} c={question.c} />
-          </>
+          <div>
+            <span>{question.id}: </span> <span><ShowEquation a={question.a} b={question.b} c={question.c} /></span>
+          </div>
         )
       })}
     </div>
   )
-}
+} 
