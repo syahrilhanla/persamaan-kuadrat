@@ -11,9 +11,10 @@ export const DynamicForm = ({ isRandom }) => {
 	const [valueD, setD] = useState("");
 	const [valueX, setX] = useState({});
 
-	const { pickedQuestion } = useContext(GlobalContext);
+	const { pickedQuestion, questionsData } = useContext(GlobalContext);
 
 	// console.log(pickedQuestion);
+
 
 	useEffect(() => {
 		setA(pickedQuestion.map((item) => item.a));
@@ -169,9 +170,9 @@ export const DynamicForm = ({ isRandom }) => {
 		if (valueB === "") setB(0);
 		if (valueC === "") setC(0);
 
-		const a = parseFloat(valueA);
-		const b = parseFloat(valueB);
-		const c = parseFloat(valueC);
+		const a = (valueA);
+		const b = (valueB);
+		const c = (valueC);
 
 		const D = Math.pow(b, 2) - 4 * a * c;
 		console.log("D", D);
@@ -179,13 +180,15 @@ export const DynamicForm = ({ isRandom }) => {
 		setD(D);
 
 		if (D > 0) {
-			const x1 = (((-b + Math.sqrt(D)) / 2) * a).toFixed(2);
-			const x2 = (((-b - Math.sqrt(D)) / 2) * a).toFixed(2);
+			const x1 = ((-b + Math.sqrt(D)) / (2 * a)).toFixed(2);
+			const x2 = ((-b - Math.sqrt(D)) / (2 * a)).toFixed(2);
+			console.log(x1, x2);
 
 			setX({
 				x1,
 				x2,
 			});
+			// console.log('valueX :>> ', valueX);
 		} // eslint-disable-next-line
 		else if (D == 0) {
 			const x1 = (-b / (2 * a)).toFixed(2);
@@ -194,6 +197,7 @@ export const DynamicForm = ({ isRandom }) => {
 				x1,
 				x2,
 			});
+			// console.log('valueX :>> ', valueX);
 		}
 	};
 

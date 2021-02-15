@@ -8,6 +8,11 @@ const AppReducer = (state, action) => {
 				...state,
 				pickedQuestion: [action.payload],
 			};
+		case "PICKING_OVER_ZEROS":
+			return {
+				...state,
+				valuesOverZero: [action.payload],
+			};
 		case "FILL_QUESTIONS":
 			// console.log(action.payload)
 			return {
@@ -21,7 +26,8 @@ const AppReducer = (state, action) => {
 
 const initialState = {
 	pickedQuestion: [],
-	questionsData: []
+	questionsData: [],
+	valuesOverZero: []
 };
 
 export const GlobalContext = createContext(initialState);
@@ -55,13 +61,50 @@ export const GlobalProvider = ({ children }) => {
 		});
 	};
 
+	const pickDsOverZero = () => {
+		try {
+			const checkingDs = (array) => {
+
+				const valuesOfD = array.map((item) => {
+					const D = Math.pow(item.b, 2) - 4 * item.a * item.c;
+					return { D, id: item.id };
+				});
+
+				// console.log(valuesOfD);
+				return valuesOfD;
+			}
+
+			const checkingDValues = () => {
+				const Ds = checkingDs(state.questionsData);
+
+				const valuesOverZero = Ds.filter(item => {
+					const values = item.D > 0
+					return values;
+				});
+				// console.log('valuesOverZero :>> ', valuesOverZero);
+				return valuesOverZero;
+			}
+
+			dispatch({
+				type: 'PICKING_OVER_ZEROS',
+				payload: checkingDValues()
+			});
+		} catch (error) {
+			console.log("error:", error);
+		}
+
+	}
+
 	return (
 		<GlobalContext.Provider
 			value={{
 				pickedQuestion: state.pickedQuestion,
+				questionsData: state.questionsData,
+				valuesOverZero: state.valuesOverZero,
 				chooseNumber,
 				getQuestions,
-				questionsData: state.questionsData
+				pickDsOverZero,
+
 			}}
 		>
 			{children}

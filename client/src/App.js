@@ -4,6 +4,7 @@ import { DynamicForm } from "./components/DynamicForm";
 import { Button } from "./components/Button";
 import { GlobalProvider } from "./components/GlobalContext";
 import { QuestionList } from "./components/QuestionList";
+import { UserTesting } from "./components/UserTesting";
 
 function App() {
 	const [userChoice, setUserChoice] = useState(0);
@@ -26,6 +27,9 @@ function App() {
 				<span onClick={() => makeChoice(2)}>
 					<Button text='Random' choice={2} />
 				</span>
+				<span onClick={() => makeChoice(3)}>
+					<Button text='Test' choice={3} />
+				</span>
 			</>
 		);
 	};
@@ -43,6 +47,10 @@ function App() {
 						<>
 							<DynamicForm isRandom={true} />
 							<QuestionList />
+						</>
+					) : userChoice === 3 ? (
+						<>
+							<UserTesting />
 						</>
 					) : null}
 				</div>
