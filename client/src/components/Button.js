@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "./GlobalContext";
-import { checkingDs } from './DynamicForm';
 
 import "./Button.css";
 
 export const Button = ({ text, choice }) => {
-	const { getQuestions, chooseNumber, pickDsOverZero, questionsData } = useContext(
+	const { getQuestions, chooseNumber, pickDsOverZero } = useContext(
 		GlobalContext
 	);
 
@@ -15,7 +14,7 @@ export const Button = ({ text, choice }) => {
 			await getQuestions();
 			await chooseNumber();
 		} else if (choice === 1) {
-			console.log('this is 1');
+			console.log("this is 1");
 		} else if (choice === 3) {
 			await getQuestions();
 			pickDsOverZero();

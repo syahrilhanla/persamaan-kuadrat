@@ -3,6 +3,7 @@ import "./DynamicForm.css";
 import "./Button.css";
 import { GlobalContext } from "./GlobalContext";
 import { EquationsData } from "./EquationData";
+import { ShowEquation } from "./ShowEquation";
 
 export const DynamicForm = ({ isRandom }) => {
 	const [valueA, setA] = useState("");
@@ -11,10 +12,9 @@ export const DynamicForm = ({ isRandom }) => {
 	const [valueD, setD] = useState("");
 	const [valueX, setX] = useState({});
 
-	const { pickedQuestion, questionsData } = useContext(GlobalContext);
+	const { pickedQuestion } = useContext(GlobalContext);
 
 	// console.log(pickedQuestion);
-
 
 	useEffect(() => {
 		setA(pickedQuestion.map((item) => item.a));
@@ -38,102 +38,6 @@ export const DynamicForm = ({ isRandom }) => {
 		const isNotNum = isNaN(value);
 		const isMinus = value.includes("-");
 		if (isNotNum && !isMinus) alert("not a number!");
-	};
-
-	const ShowEquation = () => {
-		let a = valueA;
-		let b = valueB;
-		let c = valueC;
-
-		// console.log(a, b, c);
-
-		const displayA = () => {
-			if (a === "0") {
-				return "";
-			} else if (a === "") {
-				return (
-					<span>
-						<EquationsData text='ax^2 + ' />
-					</span>
-				);
-			} else if (a === "1") {
-				return (
-					<span>
-						<EquationsData text='x^2 + ' />
-					</span>
-				);
-			} else {
-				return (
-					<span>
-						<EquationsData text={`${a}x^2 + `} />
-					</span>
-				);
-			}
-		};
-
-		const displayB = () => {
-			if (b === "0") {
-				return ''
-			} else if (b === "") return (
-				<span>
-					<EquationsData text={` bx + `} />
-				</span>
-			)
-			else if (b === "1") {
-				return (
-					<span>
-						<EquationsData text={` x + `} />
-					</span>
-				)
-			} else if (b.includes("-") || (b < 0)) return (
-				<span>
-					<EquationsData text={` (${b})x + `} />
-				</span>
-			)
-			else {
-				return (
-					<span>
-						<EquationsData text={` ${b}x + `} />
-					</span>
-				)
-			}
-		};
-
-		const displayC = () => {
-			if (c === "0") {
-				return "";
-			} else if (c === "") return (
-				<span>
-					<EquationsData text={`c`} />
-				</span>
-			)
-			else if (c === "1") return (
-				<span>
-					<EquationsData text={`1`} />
-				</span>
-			)
-			else if (c.includes("-") || (c < 0)) return (
-				<span>
-					<EquationsData text={`(${c})`} />
-				</span>
-			)
-			else return (
-				<span>
-					<EquationsData text={`${c}`} />
-				</span>
-			)
-		};
-
-		return (
-			<>
-				<h3>
-					{displayA()}
-					{displayB()}
-					{displayC()} = 0
-				</h3>
-
-			</>
-		);
 	};
 
 	const ShowResults = () => {
@@ -170,9 +74,9 @@ export const DynamicForm = ({ isRandom }) => {
 		if (valueB === "") setB(0);
 		if (valueC === "") setC(0);
 
-		const a = (valueA);
-		const b = (valueB);
-		const c = (valueC);
+		const a = valueA;
+		const b = valueB;
+		const c = valueC;
 
 		const D = Math.pow(b, 2) - 4 * a * c;
 		console.log("D", D);
@@ -258,7 +162,7 @@ export const DynamicForm = ({ isRandom }) => {
 					style={{ padding: "6px 12px" }}
 				/>
 			</form>
-			<ShowEquation />
+			<ShowEquation a={valueA} b={valueB} c={valueC} />
 			{valueD !== "" ? <ShowResults /> : null}
 		</div>
 	);
