@@ -6,6 +6,8 @@ import { ShowEquation } from "./ShowEquation";
 
 export const UserTesting = () => {
 	const [filteredQuestions, setFilteredQuestions] = useState([]);
+
+	/* eslint-disable no-return-assign, no-param-reassign */
 	const [x1, setX1] = useState("");
 	const [y1, setY1] = useState("");
 	const [x2, setX2] = useState("");
@@ -24,6 +26,7 @@ export const UserTesting = () => {
 	const [y8, setY8] = useState("");
 	const [x9, setX9] = useState("");
 	const [y9, setY9] = useState("");
+	/* eslint-enable no-return-assign, no-param-reassign */
 	const { valuesOverZero, questionsData } = useContext(GlobalContext);
 
 	const x1Ref = useRef(null);
@@ -76,6 +79,48 @@ export const UserTesting = () => {
 			case "y2":
 				setY2(value);
 				break;
+			case "x3":
+				setX3(value);
+				break;
+			case "y3":
+				setY3(value);
+				break;
+			case "x4":
+				setX4(value);
+				break;
+			case "y4":
+				setY4(value);
+				break;
+			case "x5":
+				setX5(value);
+				break;
+			case "y5":
+				setY5(value);
+				break;
+			case "x6":
+				setX6(value);
+				break;
+			case "y6":
+				setY6(value);
+				break;
+			case "x7":
+				setX7(value);
+				break;
+			case "y7":
+				setY7(value);
+				break;
+			case "x8":
+				setX8(value);
+				break;
+			case "y8":
+				setY8(value);
+				break;
+			case "x9":
+				setX9(value);
+				break;
+			case "y9":
+				setY9(value);
+				break;
 
 			default:
 				break;
@@ -93,6 +138,41 @@ export const UserTesting = () => {
 				console.log(index);
 				setX2("");
 				setY2("");
+				break;
+			case "3":
+				console.log(index);
+				setX3("");
+				setY3("");
+				break;
+			case "4":
+				console.log(index);
+				setX4("");
+				setY4("");
+				break;
+			case "5":
+				console.log(index);
+				setX5("");
+				setY5("");
+				break;
+			case "6":
+				console.log(index);
+				setX6("");
+				setY6("");
+				break;
+			case "7":
+				console.log(index);
+				setX7("");
+				setY7("");
+				break;
+			case "8":
+				console.log(index);
+				setX8("");
+				setY8("");
+				break;
+			case "2":
+				console.log(index);
+				setX9("");
+				setY9("");
 				break;
 
 			default:
