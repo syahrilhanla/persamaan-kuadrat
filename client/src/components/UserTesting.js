@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { GlobalContext } from "./GlobalContext";
 import "./DynamicForm.css";
 import "./Button.css";
@@ -25,6 +25,8 @@ export const UserTesting = () => {
 	const [x9, setX9] = useState("");
 	const [y9, setY9] = useState("");
 	const { valuesOverZero, questionsData } = useContext(GlobalContext);
+
+	const x1Ref = useRef(null);
 	// console.log(valuesOverZero[0])
 
 	useEffect(() => {
@@ -54,17 +56,25 @@ export const UserTesting = () => {
 		// console.log('selectedQuestions :>> ', selectedQuestions, element);
 	}, [valuesOverZero]);
 
-	console.log(filteredQuestions);
+	console.log("rendering");
 
 	const handleClick = (index) => {
-		console.log(`x${index + 1}`);
+		console.log("x: ", eval(`x${index + 1}`), "y: ", eval(`y${index + 1}`));
 	};
 
 	const handleChange = (stateName, value) => {
 		switch (stateName) {
 			case "x1":
 				setX1(value);
-				console.log(x1);
+				break;
+			case "y1":
+				setY1(value);
+				break;
+			case "x2":
+				setX2(value);
+				break;
+			case "y2":
+				setY2(value);
 				break;
 
 			default:
@@ -73,10 +83,20 @@ export const UserTesting = () => {
 	};
 
 	const handleReset = (index) => {
-		if (x1 !== "" || x2 !== "") {
-			const outcast = x1.filter((item, idx) => idx !== index);
-			const dumpValue = outcast.map((item) => x1.includes(item));
-			console.log("dumpValue :>> ", dumpValue);
+		switch (index.toString()) {
+			case "1":
+				console.log(index);
+				setX1("");
+				setY1("");
+				break;
+			case "2":
+				console.log(index);
+				setX2("");
+				setY2("");
+				break;
+
+			default:
+				break;
 		}
 	};
 
@@ -90,6 +110,7 @@ export const UserTesting = () => {
 					className='input-normal'
 					value={eval(firstColumn)}
 					onChange={(e) => handleChange(firstColumn, e.target.value)}
+					onFocus={(e) => e.target.focus()}
 				/>
 				{/* <span style={{ marginTop: "0.7rem" }}>or </span> */}
 				<label> or </label>
@@ -133,16 +154,52 @@ export const UserTesting = () => {
 			{/* <DisplayQuestions option={filteredQuestions} /> */}
 			{filteredQuestions.map((item, index) => {
 				return (
-					<div style={{ width: "40%", margin: "auto" }}>
+					<div style={{ width: "40%", margin: "auto" }} key={index}>
 						<DisplayEquation index={index} item={item[0]} key={index} />
 						<div style={{ display: "flex", justifyContent: "flex-start" }}>
 							<form onSubmit={(e) => e.preventDefault()}>
-								<InputFields
+								{/* <InputFields
 									firstColumn={`x${index + 1}`}
 									secondColumn={`y${index + 1}`}
 									index={index}
 									key={index}
+								/> */}
+								<label>x =</label>
+								<input
+									type='text'
+									placeholder='...'
+									className='input-normal'
+									value={eval(`x${index + 1}`)}
+									onChange={(e) =>
+										handleChange(`x${index + 1}`, e.target.value)
+									}
+									onFocus={(e) => e.target.focus()}
 								/>
+								{/* <span style={{ marginTop: "0.7rem" }}>or </span> */}
+								<label> or </label>
+								<input
+									type='text'
+									placeholder='...'
+									className='input-normal'
+									value={eval(`y${index + 1}`)}
+									onChange={(e) =>
+										handleChange(`y${index + 1}`, e.target.value)
+									}
+								/>
+								<button
+									style={{ padding: "0.1rem 0.3rem", fontSize: "18px" }}
+									className='button'
+									onClick={() => handleClick(index)}
+								>
+									Check
+								</button>
+								<button
+									style={{ padding: "0.1rem 0.3rem", fontSize: "18px" }}
+									className='button'
+									onClick={() => handleReset(index + 1)}
+								>
+									Reset
+								</button>
 							</form>
 						</div>
 						<hr />
