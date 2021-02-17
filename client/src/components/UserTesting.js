@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "./GlobalContext";
 import "./DynamicForm.css";
 import "./Button.css";
@@ -27,11 +27,9 @@ export const UserTesting = () => {
 	const [y8, setY8] = useState("");
 	const [x9, setX9] = useState("");
 	const [y9, setY9] = useState("");
+	const [answers, setAnswers] = useState(null);
 	/* eslint-enable no-return-assign, no-param-reassign */
 	const { valuesOverZero, questionsData } = useContext(GlobalContext);
-
-	const x1Ref = useRef(null);
-	// console.log(valuesOverZero[0])
 
 	useEffect(() => {
 		// Getting the questions' ids if the D over 0
@@ -62,6 +60,18 @@ export const UserTesting = () => {
 
 	console.log("rendering");
 
+	const DisplayResult = ({ result }) => {
+		return (
+			<>
+				<span>
+					<h3>
+						{result === true ? "Your Answer are Correct!" : "Wrong Answer"}
+					</h3>
+				</span>
+			</>
+		);
+	};
+
 	const handleClick = (index, answer) => {
 		const x = eval(`x${index + 1}`);
 		const y = eval(`y${index + 1}`);
@@ -73,8 +83,10 @@ export const UserTesting = () => {
 			console.log("both answers are the same");
 		} else if (parsedX == answer.result.x1 || parsedX == answer.result.x2) {
 			console.log("answer is right");
+			setAnswers(true);
 		} else if (parsedY == answer.result.x1 || parsedY == answer.result.x2) {
 			console.log("answer is right");
+			setAnswers(true);
 		} else {
 			console.log("answer is wrong");
 		}
@@ -229,6 +241,7 @@ export const UserTesting = () => {
 				>
 					Reset
 				</button>
+				{}
 			</>
 		);
 	};
@@ -300,6 +313,7 @@ export const UserTesting = () => {
 								>
 									Reset
 								</button>
+								{answers === true ? <DisplayResult result={answers} /> : null}
 							</form>
 						</div>
 						<hr />
