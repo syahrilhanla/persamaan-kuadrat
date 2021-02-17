@@ -3,6 +3,7 @@ import { GlobalContext } from "./GlobalContext";
 import "./DynamicForm.css";
 import "./Button.css";
 import { ShowEquation } from "./ShowEquation";
+import { calcResults } from "./calcResults";
 
 export const UserTesting = () => {
 	const [filteredQuestions, setFilteredQuestions] = useState([]);
@@ -61,8 +62,22 @@ export const UserTesting = () => {
 
 	console.log("rendering");
 
-	const handleClick = (index) => {
-		console.log("x: ", eval(`x${index + 1}`), "y: ", eval(`y${index + 1}`));
+	const handleClick = (index, answer) => {
+		const x = eval(`x${index + 1}`);
+		const y = eval(`y${index + 1}`);
+
+		const parsedX = parseFloat(x).toFixed(2);
+		const parsedY = parseFloat(y).toFixed(2);
+
+		if (y == x) {
+			console.log("both answers are the same");
+		} else if (parsedX == answer.result.x1 || parsedX == answer.result.x2) {
+			console.log("answer is right");
+		} else if (parsedY == answer.result.x1 || parsedY == answer.result.x2) {
+			console.log("answer is right");
+		} else {
+			console.log("answer is wrong");
+		}
 	};
 
 	const handleChange = (stateName, value) => {
@@ -231,8 +246,14 @@ export const UserTesting = () => {
 
 	return (
 		<div>
-			{/* <DisplayQuestions option={filteredQuestions} /> */}
+			<p style={{ color: "red" }}>*Use "." for Decimal Format</p>
 			{filteredQuestions.map((item, index) => {
+				const answer = {
+					result: calcResults(item[0].a, item[0].b, item[0].c),
+					index: index + 1,
+				};
+				// console.log("answer :>> ", answer);
+
 				return (
 					<div style={{ width: "40%", margin: "auto" }} key={index}>
 						<DisplayEquation index={index} item={item[0]} key={index} />
@@ -253,7 +274,6 @@ export const UserTesting = () => {
 									onChange={(e) =>
 										handleChange(`x${index + 1}`, e.target.value)
 									}
-									onFocus={(e) => e.target.focus()}
 								/>
 								{/* <span style={{ marginTop: "0.7rem" }}>or </span> */}
 								<label> or </label>
@@ -269,7 +289,7 @@ export const UserTesting = () => {
 								<button
 									style={{ padding: "0.1rem 0.3rem", fontSize: "18px" }}
 									className='button'
-									onClick={() => handleClick(index)}
+									onClick={() => handleClick(index, answer)}
 								>
 									Check
 								</button>

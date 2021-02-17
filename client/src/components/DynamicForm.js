@@ -4,6 +4,7 @@ import "./Button.css";
 import { GlobalContext } from "./GlobalContext";
 import { EquationsData } from "./EquationData";
 import { ShowEquation } from "./ShowEquation";
+import { calcResults } from "./calcResults";
 
 export const DynamicForm = ({ isRandom }) => {
 	const [valueA, setA] = useState("");
@@ -31,7 +32,11 @@ export const DynamicForm = ({ isRandom }) => {
 		e.preventDefault();
 		if (valueA === "" || valueB === "" || valueC === "")
 			alert("Fill all the fields!");
-		else calcResults();
+		else {
+			const results = calcResults(valueA, valueB, valueC);
+			setD(results.D);
+			setX({ x1: results.x1, x2: results.x2 });
+		}
 	};
 
 	const checkInput = (value) => {
@@ -66,42 +71,6 @@ export const DynamicForm = ({ isRandom }) => {
 					imajiner
 				</h3>
 			);
-		}
-	};
-
-	const calcResults = () => {
-		if (valueA === "") setA(0);
-		if (valueB === "") setB(0);
-		if (valueC === "") setC(0);
-
-		const a = valueA;
-		const b = valueB;
-		const c = valueC;
-
-		const D = Math.pow(b, 2) - 4 * a * c;
-		console.log("D", D);
-
-		setD(D);
-
-		if (D > 0) {
-			const x1 = ((-b + Math.sqrt(D)) / (2 * a)).toFixed(2);
-			const x2 = ((-b - Math.sqrt(D)) / (2 * a)).toFixed(2);
-			console.log(x1, x2);
-
-			setX({
-				x1,
-				x2,
-			});
-			// console.log('valueX :>> ', valueX);
-		} // eslint-disable-next-line
-		else if (D == 0) {
-			const x1 = (-b / (2 * a)).toFixed(2);
-			const x2 = x1;
-			setX({
-				x1,
-				x2,
-			});
-			// console.log('valueX :>> ', valueX);
 		}
 	};
 
